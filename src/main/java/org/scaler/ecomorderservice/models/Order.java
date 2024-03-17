@@ -11,7 +11,7 @@ import java.util.Date;
 @Data
 @EntityListeners(value = AuditingEntityListener.class)
 @Entity
-@Table(indexes = { @Index(name = "user_index", columnList = "userId"), @Index(name = "product_index", columnList = "productId")})
+@Table(name = "order_table" , indexes = { @Index(name = "user_index", columnList = "userId"), @Index(name = "product_index", columnList = "productId")})
 public class Order {
 
     @Id

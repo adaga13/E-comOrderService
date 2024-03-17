@@ -1,4 +1,4 @@
-CREATE TABLE `order`
+CREATE TABLE `order_table`
 (
     id              BIGINT AUTO_INCREMENT NOT NULL,
     created_at      datetime NULL,
@@ -13,6 +13,6 @@ CREATE TABLE `order`
     CONSTRAINT pk_order PRIMARY KEY (id)
 );
 
-CREATE INDEX product_index ON `order` (product_id);
+CREATE INDEX product_index ON `order_table` (product_id);
 
-CREATE INDEX user_index ON `order` (user_id);
+CREATE INDEX user_index ON `order_table` (user_id);

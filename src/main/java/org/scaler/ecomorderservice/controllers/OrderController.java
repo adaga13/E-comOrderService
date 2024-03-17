@@ -36,14 +36,18 @@ public class OrderController {
     }
 
     @PostMapping
-    public void createOrder(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader,
-                            @RequestBody CreateOrderDto createOrderDto) {
+    public ResponseEntity<Order> createOrder(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader,
+                                              @RequestBody CreateOrderDto createOrderDto) {
         String token = getToken(authorizationHeader);
         if (token == null)
-            return;
+            return ResponseEntity.badRequest().build();
 
-        orderService.createOrder(token, createOrderDto.getProductId(), createOrderDto.getQuantity(),
+        Order order = orderService.createOrder(token, createOrderDto.getProductId(), createOrderDto.getQuantity(),
                 createOrderDto.getAmount(), createOrderDto.getDiscount());
+        if (order == null)
+            return ResponseEntity.badRequest().build();
+
+        return ResponseEntity.ok(order);
     }
 
     private String getToken(String authorizationHeader) {
